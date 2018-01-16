@@ -1,11 +1,9 @@
-var deadline = '2018-10-31';
-
-function getTimeRemaining(endtime){
+function getTimeRemaining(endtime) {
   var t = Date.parse(endtime) - Date.parse(new Date());
-  var seconds = Math.floor( (t/1000) % 60 );
-  var minutes = Math.floor( (t/1000/60) % 60 );
-  var hours = Math.floor( (t/(1000*60*60)) % 24 );
-  var days = Math.floor( t/(1000*60*60*24) );
+  var seconds = Math.floor((t / 1000) % 60);
+  var minutes = Math.floor((t / 1000 / 60) % 60);
+  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+  var days = Math.floor(t / (1000 * 60 * 60 * 24));
   return {
     'total': t,
     'days': days,
@@ -15,31 +13,33 @@ function getTimeRemaining(endtime){
   };
 }
 
-getTimeRemaining(deadline).minutes;
+function initializeClock(id, endtime) {
+  var clock = document.getElementById(id);
+  var daysSpan = clock.querySelector('.days');
+  var hoursSpan = clock.querySelector('.hours');
+  var minutesSpan = clock.querySelector('.minutes');
+  var secondsSpan = clock.querySelector('.seconds');
 
-function updateClock(){
-  var t = getTimeRemaining(endtime);
-  	daysSpan.innerHTML = t.days;
-    hoursSpan.innerHTML = t.hours;
-    minutesSpan.innerHTML = t.minutes;
+  function updateClock() {
+    var t = getTimeRemaining(endtime);
+
+    daysSpan.innerHTML = t.days;
+    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
     secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
 
-  if(t.total<=0){
-    clearInterval(timeinterval);
+    if (t.total <= 0) {
+      clearInterval(timeinterval);
+    }
   }
+
+  updateClock();
+  var timeinterval = setInterval(updateClock, 1000);
 }
 
-updateClock(); // run function once at first to avoid delay
-
-function initializeClock(id, endtime){
-  var clock = document.getElementById(id);
-  var timeinterval = setInterval(updateClock,1000);
-}
+//var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
+var timeInMinutes = 1;
+var currentTime = Date.parse(new Date());
+var deadline = new Date(Oct 31, 2018 00:00:00);
 
 initializeClock('clockdiv', deadline);
-
-var daysSpan = clock.querySelector('.days');
-var hoursSpan = clock.querySelector('.hours');
-var minutesSpan = clock.querySelector('.minutes');
-var secondsSpan = clock.querySelector('.seconds');
-
