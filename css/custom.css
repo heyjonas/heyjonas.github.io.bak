@@ -20,3 +20,8 @@
 .smalltext{
 	padding-top: 5px;
 }
+
+#social a {
+	text-decoration: none;
+	color: #35424a;
+}
