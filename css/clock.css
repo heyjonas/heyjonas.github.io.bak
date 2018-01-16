@@ -1,6 +1,22 @@
 #clockdiv{
-	font-family: sans-serif;
 	color: #000;
 	display: inline-block;
+	font-weight: 100;
 	text-align: left;
+}
+
+#clockdiv > div{
+	padding: 10px;
+	border-radius: 3px;
+	display: inline-block;
+}
+
+#clockdiv div > span{
+	padding: 15px;
+	border-radius: 3px;
+	display: inline-block;
+}
+
+.smalltext{
+	padding-top: 5px;
 }
